@@ -1,6 +1,18 @@
 # Workplace Cyber Security Quiz Application
 
+GitHub Repository: https://github.com/zakjtbrown-dev/workplace_quiz_app
+
 ## 1. Introduction
+
+As a Degree Apprentice Software Tester at IBM, I work in an environment where quality, security and compliance are important considerations throughout the software development lifecycle. Employees are required to understand organisational policies, cyber security practices and industry standards to ensure systems are developed and maintained safely and effectively. As a result, training and knowledge assessment play an important role in supporting both employee development and organisational objectives.
+
+The aim of this project was to develop a Minimum Viable Product (MVP) for a workplace training quiz application. The application focuses on cyber security awareness and allows users to answer a series of multiple-choice questions before receiving a final score. Cyber security was selected as the topic because it is relevant to all employees regardless of their role and helps promote good practices when handling information and digital systems.
+
+The application was developed using Python and the Tkinter graphical user interface framework. Question data is stored within a CSV file and user results are saved to a separate CSV file, providing a simple form of persistent data storage. The project also demonstrates object-oriented programming principles, input validation, exception handling, automated testing and continuous integration through GitHub Actions.
+
+Although the application currently focuses on cyber security awareness, the design allows the questions to be easily modified for other workplace training topics. For example, the application could be adapted to assess employee knowledge of company policies, data protection requirements, health and safety procedures or onboarding activities.
+
+The purpose of this project was not only to create a functional quiz application but also to apply the software development concepts covered throughout the module. This included planning the solution, designing the user interface, implementing the application, testing functionality and documenting the final product. Through completing this project, I aimed to strengthen my understanding of Python development while producing a practical workplace-focused application.
 
 ## 2. Design Section
 
@@ -486,3 +498,19 @@ results.csv
 This approach provides simple persistent storage without requiring a database management system.
 
 ## 6. Evaluation Section
+
+Overall, I believe this project was successful in meeting the requirements outlined within the assessment brief. The final application includes a graphical user interface, persistent data storage, object-oriented programming, input validation, exception handling, automated testing and continuous integration. Users are able to complete a workplace cyber security quiz, receive a score and have their results saved for future reference.
+
+One aspect that went particularly well was the structured approach taken throughout development. Rather than attempting to create the entire application at once, I focused on implementing one area at a time. I first developed the core quiz logic before introducing data storage, the graphical user interface, testing and documentation. Breaking the project into smaller tasks made the development process more manageable and helped identify issues earlier.
+
+I was also pleased with the testing approach used throughout the project. Creating automated tests using Pytest helped verify that key validation functions behaved as expected. In addition, implementing GitHub Actions allowed tests to run automatically whenever changes were pushed to the repository. Prior to this project, I had little experience configuring continuous integration workflows myself, so this provided valuable practical experience and improved my understanding of modern software development practices.
+
+The use of object-oriented programming also improved the overall structure of the application. Creating separate classes for questions, quiz management and the graphical user interface helped organise the code and made responsibilities clearer. Separating functionality across different modules improved readability and made the application easier to maintain.
+
+Despite the success of the project, there are several improvements that could be made in future versions. The application currently stores data using CSV files, which is suitable for a minimum viable product but may become difficult to manage if a larger number of users were using the system. A future version could use a database such as SQLite to improve scalability and data management.
+
+The graphical user interface is intentionally simple and functional. If additional time were available, I would improve the visual design and introduce features such as progress indicators, score breakdowns and enhanced accessibility options. I would also consider implementing an administrator interface that would allow quiz questions to be managed through the application rather than directly editing the CSV file.
+
+Throughout the project, I developed my confidence using Python and gained a better understanding of how software applications are designed, developed, tested and documented. At the beginning of the assignment I had limited experience developing a complete application independently, so breaking the project into smaller stages helped me make steady progress. I also developed a greater appreciation for the importance of testing, version control and documentation in producing reliable software.
+
+Overall, I believe the application successfully meets the requirements of the assessment while demonstrating the knowledge and skills I have developed during the module. Although there are areas that could be improved in future iterations, the project provided valuable experience in applying software development principles to create a practical workplace-focused solution.
