@@ -33,13 +33,11 @@ The Question Screen presents questions and answer options in a clear format usin
 The Result Screen displays the user's final score after completing all questions.
 
 ### 2.2 User Journey
-### 2.2 User Journey
 
 The user journey was designed to be simple and efficient. Users enter their name, answer quiz questions, receive a score, and have their results automatically saved to a CSV file.
 
 ![User Journey](docs/screenshots/user_journey.png)
 
-### 2.3 Functional Requirements
 ### 2.3 Functional Requirements
 
 | ID | Requirement |
@@ -53,7 +51,6 @@ The user journey was designed to be simple and efficient. Users enter their name
 | FR7 | The application shall validate user inputs. |
 
 ### 2.4 Non-Functional Requirements
-### 2.4 Non-Functional Requirements
 
 | ID | Requirement |
 |----|-------------|
@@ -64,7 +61,6 @@ The user journey was designed to be simple and efficient. Users enter their name
 | NFR5 | The application should be maintainable and documented. |
 | NFR6 | The application should be testable using automated unit tests. |
 
-### 2.5 Tech Stack
 ### 2.5 Tech Stack
 
 | Component | Technology |
@@ -78,7 +74,6 @@ The user journey was designed to be simple and efficient. Users enter their name
 | Continuous Integration | GitHub Actions |
 | Design Tool | Figma |
 
-### 2.6 Code Design
 ### 2.6 Code Design
 
 The application was developed using object-oriented programming principles.
@@ -98,16 +93,255 @@ The QuizApp class controls the graphical user interface and overall application 
 ![Class Diagram](docs/screenshots/Class_diagram.png)
 
 ## 3. Development Section
+The Workplace Cyber Security Quiz was developed using Python 3.14 and the Tkinter GUI framework. The objective of the project was to create a simple but functional workplace training application that could be used to assess staff knowledge on cyber security topics. Throughout development, I focused on creating an application that satisfied all of the MVP requirements while demonstrating object-oriented programming, data persistence, testing, validation and documentation.
 
+The project was developed incrementally using Git and GitHub. Functionality was added in stages, beginning with the core quiz logic, followed by data storage, the graphical user interface, validation, testing and finally continuous integration using GitHub Actions.
+
+### Application Structure
+
+To improve maintainability and readability, the application was separated into three main modules:
+
+| File | Purpose |
+|--------|---------|
+| `main.py` | Controls the graphical user interface and application flow |
+| `quiz.py` | Contains the quiz logic, validation functions and classes |
+| `storage.py` | Handles reading and writing data to CSV files |
+
+This separation of concerns ensures that each module is responsible for a specific area of functionality and makes the application easier to maintain and extend.
+
+### Object-Oriented Design
+
+The application was developed using object-oriented programming principles. Three primary classes were created:
+
+#### Question Class
+
+The `Question` class stores information about an individual quiz question, including the question text, available answer options and the correct answer.
+
+```python
+class Question:
+
+    def __init__(self, question, options, correct_answer):
+        self.question = question
+        self.options = options
+        self.correct_answer = correct_answer.upper()
+```
+
+Using a dedicated Question class allows quiz data to be stored as reusable objects rather than individual variables.
+
+#### Quiz Class
+
+The `Quiz` class manages user responses and score calculation.
+
+```python
+class Quiz:
+
+    def __init__(self, questions):
+        self.questions = questions
+        self.user_answers = []
+
+    def add_answer(self, answer):
+        self.user_answers.append(answer.upper())
+```
+
+This class is responsible for storing answers provided by the user throughout the quiz.
+
+The final score is calculated using the `calculate_score()` method.
+
+```python
+def calculate_score(self):
+
+    score = 0
+
+    for index, question in enumerate(self.questions):
+
+        if self.user_answers[index] == question.correct_answer:
+            score += 1
+
+    return score
+```
+
+Separating the scoring functionality into its own class improves code organisation and supports future enhancements.
+
+### Input Validation
+
+Input validation was implemented to ensure users provide valid information before progressing through the application.
+
+For example, users must enter a name before the quiz can begin.
+
+```python
+def validate_name(name):
+    return len(name.strip()) > 0
+```
+
+Answer validation was also implemented to ensure only valid responses are accepted.
+
+```python
+def validate_answer(answer):
+    return answer.upper() in ["A", "B", "C", "D"]
+```
+
+These functions are pure functions because they always return the same output when provided with the same input. This makes them straightforward to test using automated unit tests.
+
+### Data Storage
+
+The assessment brief required persistent data storage. To satisfy this requirement, CSV files were used.
+
+The application loads questions from a CSV file when the quiz starts.
+
+```python
+questions = load_questions("questions.csv")
+```
+
+A separate CSV file is used to store completed quiz results.
+
+```python
+save_result("results.csv", self.name.get(), score, total)
+```
+
+Using CSV files provided a lightweight solution that avoided the complexity of implementing a database while still meeting the requirement for permanent data storage.
+
+### Exception Handling
+
+Exception handling was implemented within the storage module to prevent application failures when reading and writing files.
+
+```python
+try:
+
+    with open(filename, "r", newline="", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+
+except FileNotFoundError:
+    print("Question file not found.")
+```
+
+This ensures the application can handle unexpected situations gracefully and improves overall robustness.
+
+### Graphical User Interface
+
+Tkinter was selected as the GUI framework because it is included with Python and is suitable for lightweight desktop applications.
+
+The interface consists of three primary screens:
+
+- Start Screen
+- Question Screen
+- Result Screen
+
+The `QuizApp` class manages navigation between these screens and controls user interaction throughout the application.
+
+The Start Screen allows users to enter their name before beginning the quiz.
+
+The Question Screen displays one question at a time and allows users to select an answer using radio buttons.
+
+The Result Screen displays the user's final score and confirms that the result has been saved.
+
+### Application Workflow
+
+The final application follows the workflow below:
+
+1. User launches the application.
+2. User enters their name.
+3. Questions are loaded from the CSV file.
+4. User answers each question.
+5. Answers are validated and stored.
+6. The final score is calculated.
+7. Results are written to the CSV file.
+8. The final score is displayed to the user.
+
+This workflow ensures a simple and intuitive experience while satisfying all functional requirements identified during the design phase.
 ## 4. Testing Section
+Testing was carried out throughout the development lifecycle to ensure the application functioned correctly and met the requirements identified during the design phase. Both manual and automated testing approaches were used.
 
 ### 4.1 Testing Strategy
 
+A combination of manual testing and automated unit testing was used.
+
+Manual testing was used to verify that the graphical user interface behaved as expected and that users could successfully complete the quiz from start to finish.
+
+Automated unit testing was used to verify that core validation functions behaved consistently and produced the expected outputs. These tests focused on logic that could be isolated from the user interface.
+
+In addition to local testing, continuous integration was implemented using GitHub Actions. This ensured that automated tests were executed whenever changes were pushed to the repository.
+
 ### 4.2 Manual Testing
+
+The following manual tests were completed during development.
+
+| Test ID | Test Scenario | Expected Result | Actual Result | Status |
+|----------|---------------|----------------|---------------|---------|
+| MT1 | Launch application | Application opens successfully | Application opened successfully | Pass |
+| MT2 | Enter valid name | User progresses to quiz | User progressed to quiz | Pass |
+| MT3 | Leave name blank | Error message displayed | Error message displayed | Pass |
+| MT4 | Select answer and click Next | Next question displayed | Next question displayed | Pass |
+| MT5 | Complete all questions | Final score displayed | Final score displayed | Pass |
+| MT6 | Complete quiz | Results saved to CSV file | Results saved successfully | Pass |
+| MT7 | Close application using Exit button | Application closes | Application closed successfully | Pass |
+
+The screenshots below provide evidence of successful application execution.
+
+#### Start Screen
+
+![Start Screen](docs/screenshots/start_screen.png)
+
+#### Question Screen
+
+![Question Screen](docs/screenshots/question_screen_1.png)
+
+#### Result Screen
+
+![Result Screen](docs/screenshots/result_screen.png)
+
+#### Results CSV
+
+![Results CSV](docs/screenshots/results_csv.png)
 
 ### 4.3 Unit Testing
 
+Automated unit tests were created using the Pytest framework.
+
+The tests focused on validating user input and ensuring that validation functions produced the correct outputs.
+
+The following functions were tested:
+
+- `validate_name()`
+- `validate_answer()`
+
+Example test:
+
+```python
+def test_valid_name():
+    assert validate_name("Zak") is True
+```
+
+The tests were executed locally using:
+
+```bash
+python -m pytest
+```
+
+The screenshot below shows all tests passing successfully.
+
+![Pytest Results](docs/screenshots/pytest_passed.png)
+
 ### 4.4 Continuous Integration
+
+GitHub Actions was implemented to automatically execute tests whenever code was pushed to the repository.
+
+This provides continuous integration functionality and helps ensure that future changes do not introduce defects into the application.
+
+The workflow performs the following actions:
+
+1. Checks out the repository.
+2. Installs Python.
+3. Installs project dependencies.
+4. Executes Pytest.
+5. Reports the test results.
+
+The screenshot below shows a successful GitHub Actions run.
+
+![GitHub Actions](docs/screenshots/github_actions_passed.png)
+
+### Testing Outcome
+
+All manual tests passed successfully and all automated unit tests passed without errors. The implementation of GitHub Actions provided an additional layer of quality assurance by automatically executing tests whenever updates were pushed to the repository.
 
 ## 5. Documentation Section
 
