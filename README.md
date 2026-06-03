@@ -344,9 +344,145 @@ The screenshot below shows a successful GitHub Actions run.
 All manual tests passed successfully and all automated unit tests passed without errors. The implementation of GitHub Actions provided an additional layer of quality assurance by automatically executing tests whenever updates were pushed to the repository.
 
 ## 5. Documentation Section
-
 ### 5.1 User Documentation
 
+The Workplace Cyber Security Quiz was designed to be simple and intuitive for workplace users. No technical knowledge is required to operate the application.
+
+#### Running the Application
+
+1. Open the project folder.
+2. Open a terminal within the project directory.
+3. Run the following command:
+
+```bash
+python main.py
+```
+
+4. The application window will launch.
+
+#### Completing the Quiz
+
+1. Enter your name on the Start Screen.
+2. Click **Start Quiz**.
+3. Read each question carefully.
+4. Select one answer from the available options.
+5. Click **Next** to move to the following question.
+6. Continue until all questions have been answered.
+7. View your final score on the Result Screen.
+8. Click **Exit** to close the application.
+
+#### Application Screens
+
+##### Start Screen
+
+![Start Screen](docs/screenshots/start_screen.png)
+
+The Start Screen allows the user to enter their name before beginning the quiz.
+
+##### Question Screen
+
+![Question Screen](docs/screenshots/question_screen_1.png)
+
+The Question Screen displays a question and allows the user to select an answer.
+
+##### Result Screen
+
+![Result Screen](docs/screenshots/result_screen.png)
+
+The Result Screen displays the final score achieved by the user.
+
 ### 5.2 Technical Documentation
+
+#### Project Structure
+
+```text
+workplace_quiz_app/
+│
+├── .github/
+│   └── workflows/
+│       └── tests.yml
+│
+├── docs/
+│   └── screenshots/
+│
+├── main.py
+├── quiz.py
+├── storage.py
+├── questions.csv
+├── results.csv
+├── test_quiz.py
+├── requirements.txt
+└── README.md
+```
+
+#### Module Overview
+
+##### main.py
+
+This module contains the Tkinter graphical user interface and controls the overall application workflow.
+
+Responsibilities include:
+
+- Displaying screens
+- Managing user interaction
+- Navigating between questions
+- Displaying results
+
+##### quiz.py
+
+This module contains the core business logic.
+
+Responsibilities include:
+
+- Question class
+- Quiz class
+- Score calculation
+- Input validation
+
+##### storage.py
+
+This module manages persistent storage.
+
+Responsibilities include:
+
+- Reading quiz questions from CSV
+- Writing results to CSV
+- Handling file-related exceptions
+
+#### Running Unit Tests
+
+Unit tests can be executed locally using:
+
+```bash
+python -m pytest
+```
+
+A successful test run should show all tests passing.
+
+#### Continuous Integration
+
+GitHub Actions has been configured to automatically run unit tests whenever changes are pushed to the repository.
+
+The workflow configuration can be found in:
+
+```text
+.github/workflows/tests.yml
+```
+
+#### Data Storage
+
+Quiz questions are stored within:
+
+```text
+questions.csv
+```
+
+Quiz results are stored within:
+
+```text
+results.csv
+```
+
+This approach provides simple persistent storage without requiring a database management system.
 
 ## 6. Evaluation Section
